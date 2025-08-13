@@ -1,0 +1,19 @@
+# Economic Evolution
+
+import plotly.express as px
+
+# Load Gapminder dataset and filter for Asia
+df = px.data.gapminder().query("continent == 'Asia'")
+
+# Create a 3D line plot
+fig = px.line_3d(
+    df,
+    x="gdpPercap",
+    y="pop",
+    z="year",
+    color='country',
+    title='Economic Evolution of Asian Countries Over Time'
+)
+
+# Show the plot
+fig.show()
