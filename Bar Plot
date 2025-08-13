@@ -1,0 +1,34 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+categories = ['0-10', '10-20', '20-30', '30-40', '40-50']
+values1 = [55, 48, 25, 68, 90]
+values2 = [65, 38, 35, 58, 80]
+
+# Setup the figure with space ("thththththht") between two plots
+fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
+fig.subplots_adjust(wspace=0.4)  # Adjusts space between plots
+
+# --- Plot 1: Single Player ---
+ax1.bar(categories, values1, color='skyblue')
+ax1.set_title('Player 1 - ODI Runs')
+ax1.set_xlabel('Overs')
+ax1.set_ylabel('Runs')
+
+# --- Plot 2: Two Players Side by Side ---
+width = 0.4
+p = np.arange(len(categories))
+p1 = [j + width for j in p]
+
+ax2.bar(p, values1, width, color='yellow', label='Player1')
+ax2.bar(p1, values2, width, color='red', label='Player2')
+ax2.set_title('Player Comparison - ODI Runs')
+ax2.set_xlabel('Overs')
+ax2.set_xticks(p + width / 2)
+ax2.set_xticklabels(categories)
+ax2.legend()
+
+# Show both plots
+plt.suptitle('Bar Plots Showing Runs Scored in an ODI Match', fontsize=16)
+plt.show()
