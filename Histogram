@@ -1,0 +1,55 @@
+import matplotlib.pyplot as plt
+from matplotlib import style
+
+# Data
+age_men = [25, 11, 68, 18, 27, 28, 15, 43, 58, 63,
+           43, 65, 51, 36, 33, 26, 23, 35, 49, 58]
+
+# --------------------
+# Case 1: Basic Histogram
+# --------------------
+plt.hist(age_men, bins=6)
+plt.title("Histogram (Default Settings)")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+
+# --------------------
+# Case 2: Custom Bins & Edge Color
+# --------------------
+bins = [10, 20, 30, 40, 50, 60, 70]
+
+plt.hist(age_men, bins=bins, edgecolor='r')
+plt.title("Histogram with Custom Bins and Red Edges")
+plt.xlabel("Age")
+plt.ylabel("Frequency")
+plt.show()
+
+# --------------------
+# Case 3: Styled Histogram
+# --------------------
+style.use('fivethirtyeight')  # Try also: 'bmh', 'ggplot'
+
+plt.hist(age_men, bins=10, edgecolor='y', color='g', rwidth=0.7)
+plt.xlabel('Age of People', fontsize=20)
+plt.ylabel('Number of People', fontsize=20)
+plt.title('Age vs Number of People', fontsize=20)
+plt.show()
+
+# --------------------
+# Case 4: Multiple Datasets (Men vs Women)
+# --------------------
+age_women = [48, 57, 59, 25, 19, 37, 18, 56, 22, 25,
+             56, 25, 14, 49, 53, 45, 46, 19, 28, 70, 31]
+
+plt.figure(figsize=(6, 6))
+style.use('ggplot')  # Changing style
+
+plt.hist([age_men, age_women], bins=bins, color=['blue', 'orange'],
+         rwidth=0.5, label=['Men', 'Women'])
+
+plt.xlabel('Age of People', fontsize=20)
+plt.ylabel('Number of People', fontsize=20)
+plt.title('Age vs Number of People', fontsize=20)
+plt.legend(loc='upper right')
+plt.show()
