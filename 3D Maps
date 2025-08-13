@@ -1,0 +1,69 @@
+# =====================================================================
+# 🗺️ CASE 1: World Choropleth Map – GDP per Capita by Country
+# =====================================================================
+
+import plotly.express as px
+import pandas as pd
+
+# Load gapminder dataset
+data = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/gapminder_with_codes.csv')
+
+# Create choropleth map (animated by year)
+fig_world = px.choropleth(
+    data,
+    locations='iso_alpha',         # ISO-3 codes
+    color='gdpPercap',             # Metric to color by
+    hover_name='country',          # Info on hover
+    animation_frame='year',        # Animation over years
+    projection='natural earth',    # Map projection
+    title='🌍 GDP per Capita by Country Over Time'
+)
+
+# Show the world map
+fig_world.show()
+
+# =====================================================================
+# 🇮🇳 CASE 2: Choropleth Map of India – Population Density by State
+# =====================================================================
+
+import json
+
+# Load India GeoJSON
+with open("states_india.geojson", "r") as f:
+    india_states = json.load(f)
+
+# Load India Census data
+df_india = pd.read_csv("india_census.csv")
+
+# Create state ID mapping from GeoJSON
+state_id_map = {}
+for feature in india_states["features"]:
+    feature["id"] = feature["properties"]["state_code"]
+    state_id_map[feature["properties"]["st_nm"]] = feature["id"]
+
+# Clean and extract numeric density values
+df_india["Density"] = df_india["Density[a]"].apply(lambda x: int(x.split("/")[0].replace(",", "")))
+
+# Map state names to GeoJSON IDs
+df_india["id"] = df_india["State or union territory"].map(state_id_map)
+
+# Create choropleth for India
+fig_india = px.choropleth(
+    df_india,
+    geojson=india_states,
+    locations='id',
+    color='Density',
+    hover_name='State or union territory',
+    title="🇮🇳 Population Density by Indian State",
+    color_continuous_scale="YlOrRd"
+)
+
+fig_india.update_geos(fitbounds="locations", visible=False)
+
+# Show the India map
+fig_india.show()
+
+
+
+
+
