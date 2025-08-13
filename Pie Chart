@@ -1,0 +1,55 @@
+import matplotlib.pyplot as plt
+
+# Data
+exp_vals = [1400, 600, 300, 410, 250]
+exp_labels = ["Home Rent", "Food", "Phone/Internet Bill", "Car", "Other Utilities"]
+
+# ---------------------
+# Case 1: Basic Pie Chart with Shadow
+# ---------------------
+plt.pie(exp_vals, labels=exp_labels, shadow=True)
+plt.title("Case 1: Basic Pie Chart")
+plt.show()
+
+# ---------------------
+# Case 2: Pie Chart with Percentage and Larger Radius
+# ---------------------
+plt.pie(
+    exp_vals,
+    labels=exp_labels,
+    shadow=True,
+    autopct='%0.1f%%',
+    radius=1.5
+)
+plt.title("Case 2: Pie Chart with Percentages and Bigger Size")
+plt.show()
+
+# ---------------------
+# Case 3: Pie Chart with Exploded Slices
+# ---------------------
+plt.pie(
+    exp_vals,
+    labels=exp_labels,
+    shadow=True,
+    autopct='%1.1f%%',
+    radius=1.5,
+    explode=[0, 0, 0, 0.2, 0.1]
+)
+plt.title("Case 3: Exploded Pie Chart")
+plt.show()
+
+# ---------------------
+# Case 4: Custom Angle and Clockwise Direction
+# ---------------------
+plt.pie(
+    exp_vals,
+    labels=exp_labels,
+    shadow=True,
+    autopct='%1.1f%%',
+    radius=1.5,
+    explode=[0, 0, 0, 0.1, 0.2],
+    counterclock=False,
+    startangle=30
+)
+plt.title("Case 4: Custom Start Angle and Clockwise")
+plt.show()
