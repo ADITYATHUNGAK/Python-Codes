@@ -1,0 +1,39 @@
+# Case 1:
+# This program generates a time series line plot of Dollar vs Rupee using Plotly.
+
+import pandas as pd
+import plotly.express as px
+
+dollar_conv = pd.read_csv('CUR_DLR_INR.csv')
+fig = px.line(dollar_conv, x='DATE', y='RATE', title='Dollar vs Rupee')
+fig.show()
+
+# Case 2:
+# In this Python program, we visualize the match progression of India and Australia using a time series line plot.
+# It shows how runs accumulate over overs in an ODI cricket match.
+
+runs_scored = pd.read_csv('AusVsInd.csv')
+fig = px.line(runs_scored, x='Overs', y=['AUS', 'IND'], markers=True)
+fig.update_layout(
+    title='Australia vs India ODI Match',
+    xaxis_title='OVERS',
+    yaxis_title='RUNS',
+    legend_title='Country'
+)
+fig.show()
+
+# Case 3:
+# Bar Graph of Runs scored every Over.
+# This plot compares the run rate per over (RPO) between India and Australia using grouped bars.
+
+fig = px.bar(runs_scored, x='Overs', y=['AUS_RPO', 'IND_RPO'], barmode='group')
+fig.update_layout(
+    title='Australia vs India ODI Match',
+    xaxis_title='OVERS',
+    yaxis_title='RUNS',
+    legend_title='Country'
+)
+fig.show()
+
+
+
